@@ -76,7 +76,7 @@ class MMTransform():
                 if node.getchildren():
                     branchcontent.append(os.linesep)
                     branchcontent.append('h')
-                    branchcontent.append(str(num))
+                    branchcontent.append(str(num+1))
                     branchcontent.append('. ')
             else:
                 if node.getchildren():
@@ -112,7 +112,7 @@ class MakeBlogInGithub():
         prefix.append('tags : [' + ', '.join(config['tags'].split(',')) + ']')
         prefix.append('title : ' + config['title'])
         prefix.append('---')
-        prefix.append('[思维导图文件下载]('+config['mmLink']+')')
+        prefix.append('[阅读思维导图]('+config['mmLink']+')')
         prefix.append(md)
         return os.linesep.join(prefix)
 

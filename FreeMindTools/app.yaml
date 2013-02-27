@@ -1,6 +1,6 @@
 file_dir:
-    md: /home/rain/download
-    mm: /home/rain/download
+    md: C:\Documents and Settings\Administrator\桌面
+    mm: D:\Python26\FreeMindTools-master\new
     # mddir:/home/rain/doc/samrain.github.com/_posts
 default.mm:
     mdfname: default.md
