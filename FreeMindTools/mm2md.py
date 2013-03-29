@@ -46,7 +46,7 @@ class MMTransform():
             else:
                 if node.getchildren():
                     while j < num-3:
-                        branchcontent.append(' ')
+                        branchcontent.append('    ')
                         j = j+1
                     branchcontent.append('- ')
             self._dumpstr(node,md,branchcontent,linesep)
@@ -76,7 +76,7 @@ class MMTransform():
                 if node.getchildren():
                     branchcontent.append(os.linesep)
                     branchcontent.append('h')
-                    branchcontent.append(str(num+1))
+                    branchcontent.append(str(num))
                     branchcontent.append('. ')
             else:
                 if node.getchildren():
@@ -112,7 +112,7 @@ class MakeBlogInGithub():
         prefix.append('tags : [' + ', '.join(config['tags'].split(',')) + ']')
         prefix.append('title : ' + config['title'])
         prefix.append('---')
-        prefix.append('[阅读思维导图]('+config['mmLink']+')')
+        prefix.append('[思维导图文件下载]('+config['mmLink']+')')
         prefix.append(md)
         return os.linesep.join(prefix)
 
@@ -128,7 +128,7 @@ def getconf(conf_dic, title):
 
 
 def main(argv):
-    confile = file('app.yaml','rb')
+    confile = file('/home/rain/doc/FreeMindTools/app.yaml','rb')
     config = yaml.load(confile)
     dirconf = 'file_dir'
     mmdir = config[dirconf]['mm']
