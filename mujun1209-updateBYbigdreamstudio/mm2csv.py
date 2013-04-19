@@ -109,7 +109,7 @@ def mm2csv(in_dir,out_dir):
 			load_node(node,xml_data)
 		f_out_name = os.path.join(out_dir,f_in_name[0:f_in_name.rfind(".")]+".csv")
 		write_csv(f_out_name,xml_data)
-		print "write file :"+f_out_name
+		
 	
 	pass
 		
@@ -143,6 +143,7 @@ def write_csv(filepath,xml_data):
 		file.write(csvline.encode('utf'))
 	
 	file.close()
+	print "write file :"+filepath
 	pass
 
 	

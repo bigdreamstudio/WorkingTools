@@ -63,7 +63,7 @@ def init_br():
 	br.set_handle_robots(False)
 
 	# Follows refresh 0 but not hangs on refresh > 0
-	br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+	#br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 
 	# Want debugging messages?
 	#br.set_debug_http(True)
@@ -162,19 +162,19 @@ def do_import(br,is_send_mail = False,is_add_category = False,is_add_version = T
 	
 	br.select_form(nr=1)
 	import_form = br.form
-	
 
 	send_mail_control = import_form.find_control("send_emails",type="checkbox")
 	send_mail_control.items[0].selected = is_send_mail # 发送邮件设置 
-	
+	'''
 	add_categories_control = import_form.find_control("add_categories",type="checkbox")
 	add_categories_control.items[0].selected = is_add_category # 自动新增问题类别
 	
-	add_versions_control = import_form.find_control("add_versions",type="checkbox")
-	add_versions_control.items[0].selected = is_add_version # 自动新增目标版本
 	
 	update_issue_control = import_form.find_control("update_issue",type="checkbox")
 	update_issue_control.items[0].selected = is_update_issue # 更新已存在的问题
+	'''
+	add_versions_control = import_form.find_control("add_versions",type="checkbox")
+	add_versions_control.items[0].selected = is_add_version # 自动新增目标版本
 	
 	import_response = br.submit()
 	import_htm = import_response.read()
