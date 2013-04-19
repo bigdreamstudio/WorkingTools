@@ -87,7 +87,7 @@ def writeweeklyreport(tasklist):
     """
         保存XLS文件
     """
-    filename = u'【TG-IT(1208-3】个人周工作报告(' + task[2] + ').xls'
+    filename = '【TG-IT(1208-5)】个人周工作报告(' + task[2].encode('utf-8') + ').xls'
     book.save(os.path.join(weekreportdir,filename))
 
 def writetractable(tasklist):
@@ -136,16 +136,16 @@ def writetractable(tasklist):
     """
         保存XLS文件
     """
-    filename = u'【TG-IT(1208-3)】任务执行跟踪表(' + task[4] + ').xls'
+    filename = '【TG-IT(1208-5)】任务执行跟踪表(' + task[4].encode('utf-8') + ').xls'
     book.save(os.path.join(tracdir,filename))
 
 
 """
     打开一个目录下所有xls文件
 """
-dir_name = "D:\Python26\samrain-PDCATools-c097e99"
-tracdir = 'D:\Python26\samrain-PDCATools-c097e99'
-weekreportdir = 'D:\Python26\samrain-PDCATools-c097e99'
+dir_name = "/home/rain/下载/plan"
+tracdir = '/home/rain/下载/trac'
+weekreportdir = '/home/rain/下载/weekreport'
 file_list = [f_name for f_name in os.listdir(dir_name) if f_name.endswith('plan.xls')]
 
 tasklist = []
@@ -207,7 +207,7 @@ for row in rows:#遍历执行人集合，以执行人为条件查询他的计划
 cur.execute('select checker from plan group by checker')
 rows = cur.fetchall()
 for row in rows:
-    print row[0]
+    print row[0].encode('utf-8')
     cur.execute('select * from plan where checker = ?',[row[0]])
     writetractable(cur.fetchall())
 

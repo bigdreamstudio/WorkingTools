@@ -16,13 +16,12 @@ from xlwt import *
 import xlwt
 import sys
 import tool4gan
-import datetime
 
 """
     打开一个目录下所有ganttproject文件
 """
-dir_name = "D:\Python26\samrain-PDCATools-c097e99"
-outputdir= "D:\Python26\samrain-PDCATools-c097e99"
+dir_name = "/home/rain/下载/gan"
+outputdir= "/home/rain/下载/plan"
 file_list = [f_name for f_name in os.listdir(dir_name) if f_name.endswith('gan')]
 
 """
@@ -86,12 +85,7 @@ for f_in_name in file_list:
     """
         导出计划任务分配表
     """
-	
-    now = datetime.datetime.now() #当前日期
-    nextweekstar = now + datetime.timedelta(days=(7-now.weekday())) #下周一日期
-    newtweekend = nextweekstar + datetime.timedelta(days=4) #下周五日期
-	
-    cur.execute('SELECT a.plan,a.name taskname,c.name,date(a.startdate,a.strdur) enddate,(select resources.name from resources where resources.id = a.pmid) checker FROM taskfromgantproj a,allocations b,resources c where a.id = b.taskid and b.resourceid = c.id and a.startdate >= ? and date(a.startdate,a.strdur)<= ? order by date(a.startdate,a.strdur),a.name',[datetime.date.isoformat(nextweekstar),datetime.date.isoformat(newtweekend)])
+    cur.execute('SELECT a.plan,a.name taskname,c.name,date(a.startdate,a.strdur) enddate,(select resources.name from resources where resources.id = a.pmid) checker FROM taskfromgantproj a,allocations b,resources c where a.id = b.taskid and b.resourceid = c.id and a.startdate >= ? and date(a.startdate,a.strdur)<= ? order by date(a.startdate,a.strdur),a.name',['2012-08-20','2012-08-24'])
     rows = cur.fetchall()
     r = 1
     book = xlwt.Workbook()
@@ -111,7 +105,7 @@ for f_in_name in file_list:
     sheet1.write(0,4,u'检查人')
     sheet1.write(0,5,u'预计工期')
 
-    book.save(os.path.join(outputdir,projectname)+'plan.xls')
+    book.save(os.path.join(outputdir,projectname.encode('utf-8'))+'plan.xls')
 cur.close()
 #conn.commit()
 conn.close()
